@@ -6,11 +6,17 @@ describe("Signup Test", () => {
     const password = "Password1";
     const securityAnswer = "Hello world";
 
-    it("Test valid signup", () => {
+    beforeEach(() => {
+        cy.log("Email: " + email);
+        cy.log("Password: " + password)
         cy.visit("http://localhost:3000/#/");
         cy.get(".cdk-overlay-backdrop").click(-50,-50, {force: true})
         cy.get('#navbarAccount').click();
         cy.get("#navbarLoginButton").click();
+    })
+
+    it("Test valid signup", () => {
+   
         cy.get('#newCustomerLink').contains('Not yet a customer?').click({force: true});
         cy.get('#emailControl').type(email);
         cy.get('#passwordControl').type(password);
@@ -23,10 +29,6 @@ describe("Signup Test", () => {
     })
 
     it("Test valid login", () => {
-        cy.visit("http://localhost:3000/#/");
-        cy.get(".cdk-overlay-backdrop").click(-50,-50, {force: true})
-        cy.get('#navbarAccount').click();
-        cy.get("#navbarLoginButton").click();
         cy.get('#email').type(email);
         cy.get('#password').type(password);
         cy.get("#loginButton").click();
