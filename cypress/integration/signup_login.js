@@ -21,4 +21,16 @@ describe("Signup Test", () => {
         cy.get('#registerButton').click();
         cy.get('.mat-snack-bar-container').contains("Registration completed successfully");
     })
+
+    it("Test valid login", () => {
+        cy.visit("http://localhost:3000/#/");
+        cy.get(".cdk-overlay-backdrop").click(-50,-50, {force: true})
+        cy.get('#navbarAccount').click();
+        cy.get("#navbarLoginButton").click();
+        cy.get('#email').type(email);
+        cy.get('#password').type(password);
+        cy.get("#loginButton").click();
+        cy.get(".fa-layers-counter").contains("0");
+   
+    })
 })
