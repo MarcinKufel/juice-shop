@@ -37,4 +37,18 @@ describe("Signup Test", () => {
             cy.get(".fa-layers-counter").contains("0");
         })
     })
+
+    describe("API tests", () => {
+        it("Test Login via API (Non UI)", () => {
+            const userCredentials = {
+                "email": email,
+                "password": password
+            }
+
+            cy.request("POST", "http://localhost:3000/rest/user/login", userCredentials)
+            .then(response => {
+                expect(response.status).to.eq(200);
+            })
+        })
+    })
 })
